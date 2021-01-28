@@ -26,7 +26,7 @@ public class InventoryDao {
 
     public int save(InventoryDto.New value) throws SQLException {
         String baseQuery = "INSERT INTO inventory(id, inventory_name, id_category, id_admin, tgl_upload, last_update)" +
-                "values(:id, :inventoryName, :idCategory, idAdmin, :tglUpload, :lastUpdate)";
+                "values(:id, :inventoryName, :idCategory, :idAdmin, :tglUpload, :lastUpdate)";
 
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", value.getId());
@@ -65,7 +65,7 @@ public class InventoryDao {
 
     public Optional<InventoryDto.Information> findById(String id) throws EmptyResultDataAccessException {
         String baseQuery = "SELECT i.id as id, i.inventory_name as inventoryName, i.id_category as idCategory, \n" +
-                "i.id_admin as idAdmin, i.tgl_upload  as tglUpload, i.last_upload as lastUpload, \n" +
+                "i.id_admin as idAdmin, i.tgl_upload  as tglUpload, i.last_update as lastUpdate, \n" +
                 "CONCAT(ua.first_name,ua.last_name) as adminInventory, mki.nama_kategori as namaKategori \n" +
                 "from inventory i left join user_admin ua on(i.id_admin = ua.id) \n" +
                 "left join m_kategori_inventory mki on(i.id_category = mki.id); where i.id = :id";
@@ -94,8 +94,8 @@ public class InventoryDao {
 
     public List<InventoryDto.Information> findAll() throws EmptyResultDataAccessException {
         String baseQuery = "SELECT i.id as id, i.inventory_name as inventoryName, i.id_category as idCategory, \n" +
-                "i.id_admin as idAdmin, i.tgl_upload  as tglUpload, i.last_upload as lastUpload, \n" +
-                "CONCAT(ua.first_name,ua.last_name) as adminInventory, mki.nama_kategori as namaKategori \n" +
+                "i.id_admin as idAdmin, i.tgl_upload  as tglUpload, i.last_update as lastUpdate, \n" +
+                "CONCAT(ua.first_name, ' ',ua.last_name) as adminInventory, mki.nama_kategori as namaKategori \n" +
                 "from inventory i left join user_admin ua on(i.id_admin = ua.id) \n" +
                 "left join m_kategori_inventory mki on(i.id_category = mki.id); ";
 
