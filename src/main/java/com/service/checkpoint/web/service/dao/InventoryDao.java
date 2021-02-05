@@ -50,7 +50,7 @@ public class InventoryDao {
     }
 
     public void update(InventoryDto.Update value) throws DataAccessException{
-        String baseQuery = "update storange set inventory_name = :inventoryName, id_category = :idCategory," +
+        String baseQuery = "update inventory set inventory_name = :inventoryName, id_category = :idCategory," +
                 "id_admin = :idAdmin, last_update = :lastUpdate where id = :id";
 
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
